@@ -62,8 +62,19 @@ export default function StatusPage() {
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-sm w-full bg-white rounded-xl shadow p-6">
-        <h1 className="text-lg font-semibold mb-4">Application Status</h1>
-
+        <div className="flex items-center justify-between mb-4">
+  <h1 className="text-lg font-semibold">Application Status</h1>
+  <button
+    onClick={function () {
+      fetch('/api/auth/logout', { method: 'POST' }).then(function () {
+        window.location.href = '/signin'
+      })
+    }}
+    className="text-xs text-gray-500 underline"
+  >
+    Logout
+  </button>
+</div>
         <div className="space-y-2 mb-4">
           {events.map(function (evt) {
             return (
