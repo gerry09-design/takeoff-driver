@@ -42,11 +42,15 @@ export default function SignInPage() {
     const data = await res.json()
     setLoading(false)
 
-    if (data.ok) {
-      router.push('/onboarding')
-    } else {
-      setError(data.error || 'Invalid code')
-    }
+   if (data.ok) {
+  if (data.status === 'draft') {
+    router.push('/onboarding')
+  } else {
+    router.push('/status')
+  }
+} else {
+  setError(data.error || 'Invalid code')
+}
   }
 
   return (

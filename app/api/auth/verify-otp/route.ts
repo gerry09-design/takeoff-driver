@@ -68,5 +68,11 @@ export async function POST(req: NextRequest) {
 
   await setSession(driverId)
 
-  return NextResponse.json({ ok: true, isNew })
+const { data: driverStatus } = await supabaseAdmin
+  .from('drivers')
+  .select('status')
+  .eq('id', driverId)
+  .single()
+
+return NextResponse.json({ ok: true, isNew, status: driverStatus ? driverStatus.status : 'draft' })
 }
